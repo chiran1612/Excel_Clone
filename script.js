@@ -25,6 +25,15 @@ for(let i=0;i<allCells.length;i++){
         addressInput.value = address;
         //update UI
         formulaInput.value = cellObject.formula;
+        
+        cellObject.fontStyle.bold?document.querySelector(".bold").classList.add("active-font-style"):
+        document.querySelector(".bold").classList.remove("active-font-style");
+
+        cellObject.fontStyle.italic?document.querySelector(".italic").classList.add("active-font-style"):
+        document.querySelector(".italic").classList.remove("active-font-style");
+
+        cellObject.fontStyle.underline?document.querySelector(".underline").classList.add("active-font-style"):
+        document.querySelector(".underline").classList.remove("active-font-style");
     })
 
     allCells[i].addEventListener("blur",function(e){
@@ -37,6 +46,28 @@ for(let i=0;i<allCells.length;i++){
         }
         cellObject.value = cellValue;
         console.log("After UPdate",cellObject);
+        updateChildren(cellObject);
+        if(cellObject.visited){
+            return;
+        }
+        cellObject.visited = true;
+        visitedCells.push({"rowId":rowId,"colId":colId});
+    })
+
+    allCells[i].addEventListener("keydown",function(e){
+        if(e.key == 'Backspace'){
+            let cell = e.target;
+            let {rowId,colId} = getRowIdColIdFromElement(cell);
+            let cellObject = db[rowId][colId];
+            if(cellObject.formula){
+                //update db
+                cell.formula = "";
+                //update ui 
+                formulaInput.value = "";
+                cell.textContent = "";
+                removeFormula(cellObject);
+            }
+        }
     })
 }
 
@@ -46,11 +77,15 @@ formulaInput.addEventListener("blur",function(e){
     if(formula){
         let {rowId,colId} = getRowIdColIdFromElement(lastSelectedCell);
         let cellObject = db[rowId][colId];
-        let computedValue = solveFormula(formula); // will implement in next commit
+        if(cellObject.formula){
+            removeFormula(cellObject);
+        }
+        let computedValue = solveFormula(formula,cellObject); // will implement in next commit
         //update db
         cellObject.value = computedValue;
         cellObject.formula = formula;
         //update ui
         lastSelectedCell.textContent = computedValue;
+        updateChildren(cellObject);
     }
 })
