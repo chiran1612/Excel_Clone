@@ -48,7 +48,11 @@ function initDb(){
                 children:[],
                 parent:[],
                 visited:false,
-                fontStyle:{bold:false,italic:false,underline:false}
+                fontStyle:{bold:false,  italic:false, underline:false},
+                alignStyle:{  leftAlign:false,  centerAlign:false,  rightAlign:false },
+                fontFamily:{      roboto:true,      arial:false,     rockwell:false,    monospace:false  },
+                bgColor:"#ffffff",
+                textColor:"#000000"
             }
             row.push(cellObject);
         }

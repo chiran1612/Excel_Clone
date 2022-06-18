@@ -15,8 +15,37 @@
 .menu-options{
     border-bottom: 0.5px solid var(--border-color);
     height: 30px;
+    display: flex;
 }
 
+input[type="color"] 
+{
+    border: 0;
+    width: 1.8rem;
+    margin-left: 0.4rem;
+}
+
+.color-style{
+    display: flex;
+    width: 5.5rem;
+    justify-content: center;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.fonnt-style{
+    display: flex;
+    width: 12rem;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text-style{
+    display: flex;
+    width: 12rem;
+    justify-content: center;
+    align-items: center;
+}
 .address-content{
     height: 20px;
     display: flex;
@@ -143,6 +172,7 @@
 .active-sheet{
      background-color: white;
      font-weight: bold;
+ 
 }
 
 .font-style{

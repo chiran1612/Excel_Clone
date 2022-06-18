@@ -47,6 +47,17 @@ for(let i=0;i<allCells.length;i++){
 
         cellObject.fontStyle.underline?document.querySelector(".underline").classList.add("active-font-style"):
         document.querySelector(".underline").classList.remove("active-font-style");
+
+        cellObject.alignStyle.leftAlign?document.querySelector(".left-side").classList.add("active-font-style"):
+        document.querySelector(".left-side").classList.remove("active-font-style");
+   
+        cellObject.alignStyle.centerAlign?document.querySelector(".center-side").classList.add("active-font-style"):
+        document.querySelector(".center-side").classList.remove("active-font-style");
+   
+        cellObject.alignStyle.rightAlign?document.querySelector(".right-side").classList.add("active-font-style"):
+        document.querySelector(".right-side").classList.remove("active-font-style");
+   
+   
     })
 
     allCells[i].addEventListener("blur",function(e){
