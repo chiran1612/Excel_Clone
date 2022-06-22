@@ -42,7 +42,7 @@ input[type="color"]
 
 .text-style{
     display: flex;
-    width: 12rem;
+    width: 15rem;
     justify-content: center;
     align-items: center;
 }

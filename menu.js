@@ -13,9 +13,13 @@ let leftAlignIcon=document.querySelector(".left-side");
 let centerAlignIcon=document.querySelector(".center-side");
 let rightAlignIcon=document.querySelector(".right-side");
 
+let select=document.querySelector("#fontStyleSelect");
+let selectT=document.querySelector("#font-text-size");
+
 let bgColorIcon=document.querySelector("input[id='bg-color']");
 let textColorIcon=document.querySelector("input[id='text-color']");
-let select=document.querySelector("#fontStyleSelect");
+console.log(bgColorIcon.value);
+
 
 bold.addEventListener("click",function(){
     setFontStyle("bold",bold);
@@ -50,14 +54,19 @@ select.addEventListener("change",function()
 {
     setFontStyle(select.value,select);
 })
+selectT.addEventListener("change",function()
+{
+    setFontStyle(selectT.value,select);
+})
 
 bgColorIcon.addEventListener("blur",function(){
-    setFontStyle("bgColor",bgColorIcon);
+    setcolor("bgColor",bgColorIcon);
 })
 
 textColorIcon.addEventListener("blur",function(){
-    setFontStyle("textColor",textColorIcon);
+    setcolor("textColor",textColorIcon);
 })
+
 
 
 function setFontStyle(styleName,element){
@@ -71,7 +80,14 @@ function setFontStyle(styleName,element){
                 lastSelectedCell.style.fontStyle = "normal";
             }else if(styleName=="underline"){
                 lastSelectedCell.style.textDecoration = "none";
+            }else if(styleName=="leftAlign"){
+                lastSelectedCell.style.textAlign="left";
+            }else if(styleName=="centerAlign"){
+                lastSelectedCell.style.textAlign="left";
+            }else if(styleName=="rightAlign"){
+                lastSelectedCell.style.textAlign="left";
             }
+
             element.classList.remove("active-font-style");
         }else{
             if(styleName == "bold"){
@@ -137,24 +153,44 @@ function setFontStyle(styleName,element){
             option.removeAttribute("selected");
             monospace.setAttribute("selected","");
             return;
+            }else if(styleName=="12"){
+                lastSelectedCell.style.fontSize="10px";
+            }else if(styleName=="14"){
+                lastSelectedCell.style.fontSize="12px";
+            }else if(styleName=="16"){
+                lastSelectedCell.style.fontSize="14px";
+            }else if(styleName=="18"){
+                lastSelectedCell.style.fontSize="18px";
+            }else if(styleName=="20"){
+                lastSelectedCell.style.fontSize="22px";
             }
+              /*----------Check for Background Icon-------------------*/
 
 
-             //------------Check for background color
-        if(styleName=="bgColor"){
-            cellObject.bgColor=element.value;//Change in object value
-            lastSelectedCell.style.background=element.value;//Change in ui
-            return;
-        }
+        let bgColorIcon=document.querySelector("input[id='bg-color']");
+        if(cellObject.bgColor!="#ffffff")//If color is not white
+        {
+         
         
-        //------------Check for Text color
-        if(styleName=="textColor"){
-            cellObject.textColor=element.value;//Change in object value
-            lastSelectedCell.style.color=element.value;//Change in ui
-            return;
+            //we have to change bg-color it on ui
+            bgColorIcon.value=cellObject.bgColor; 
+        }else{
+            // remove bg-color on ui
+            bgColorIcon.value="#ffffff"; 
         }
-        
 
+
+        /*----------Check for Text color Icon-------------------*/
+
+        let textColorIcon=document.querySelector("input[id='text-color']");
+        if(cellObject.textColor!="#000000")//If color is not black
+        {
+            //we have to change text-color it on ui
+            textColorIcon.value=cellObject.textColor; 
+        }else{
+            //remove text-color on ui
+            textColorIcon.value="#000000"; 
+        }
             element.classList.add("active-font-style");
         }
         cellObject.fontStyle[styleName] = !cellObject.fontStyle[styleName];
