@@ -60,11 +60,11 @@ selectT.addEventListener("change",function()
 })
 
 bgColorIcon.addEventListener("blur",function(){
-    setcolor("bgColor",bgColorIcon);
+    setFontStyle("bgColor",bgColorIcon);
 })
 
 textColorIcon.addEventListener("blur",function(){
-    setcolor("textColor",textColorIcon);
+    setFontStyle("textColor",textColorIcon);
 })
 
 
@@ -164,32 +164,18 @@ function setFontStyle(styleName,element){
             }else if(styleName=="20"){
                 lastSelectedCell.style.fontSize="22px";
             }
-              /*----------Check for Background Icon-------------------*/
-
-
-        let bgColorIcon=document.querySelector("input[id='bg-color']");
-        if(cellObject.bgColor!="#ffffff")//If color is not white
-        {
-         
-        
-            //we have to change bg-color it on ui
-            bgColorIcon.value=cellObject.bgColor; 
-        }else{
-            // remove bg-color on ui
-            bgColorIcon.value="#ffffff"; 
+                  //------------Check for background color
+        else if(styleName=="bgColor"){
+            cellObject.bgColor=element.value;//Change in object value
+            lastSelectedCell.style.background=element.value;//Change in ui
+            return;
         }
 
-
-        /*----------Check for Text color Icon-------------------*/
-
-        let textColorIcon=document.querySelector("input[id='text-color']");
-        if(cellObject.textColor!="#000000")//If color is not black
-        {
-            //we have to change text-color it on ui
-            textColorIcon.value=cellObject.textColor; 
-        }else{
-            //remove text-color on ui
-            textColorIcon.value="#000000"; 
+         //------------Check for Text color
+        else if(styleName=="textColor"){
+            cellObject.textColor=element.value;//Change in object value
+            lastSelectedCell.style.color=element.value;//Change in ui
+            return;
         }
             element.classList.add("active-font-style");
         }
