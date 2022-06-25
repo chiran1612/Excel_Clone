@@ -2,7 +2,16 @@
     --border-color:grey;
     --cell-background:lightgray;
 }
-
+.top-bar{
+    height: 5vh;
+    width: 100%;
+    text-align: center;
+    background-color:#0fb62b;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 *{
     margin: 0px;   
